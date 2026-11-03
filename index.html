@@ -249,6 +249,65 @@ textarea[aria-invalid="true"] { border-color: var(--err); }
   .d-page { padding: 28px 18px; font-size: 12px; }
   .d-signs { grid-template-columns: 1fr; }
 }
+/* ---- схема договора ---- */
+.sheet-mode span { padding: 5px 12px; font-size: 13px; }
+.sheet[data-mode="doc"] #scheme, .sheet[data-mode="scheme"] #doc, .sheet[data-mode="scheme"] #d-top { display: none; }
+.s-page { container-type: inline-size; }
+.s-lede { color: var(--paper-muted); max-width: 62ch; }
+.s-h { font-family: var(--f-doc); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--paper-muted); margin: 26px 0 10px; padding-bottom: 4px; border-bottom: 1px solid var(--paper-line); }
+.s-link { font-size: 10.5px; font-weight: 400; white-space: nowrap; margin-left: 4px; }
+.s-flow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr) minmax(0, 1fr); gap: 12px; align-items: center; }
+.s-party { border: 2px solid var(--paper-ink); border-radius: 6px; padding: 10px 12px; display: grid; gap: 2px; text-align: center; overflow-wrap: anywhere; }
+.s-role { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--paper-muted); }
+.s-arrows { display: grid; gap: 14px; }
+.s-arrow { position: relative; display: grid; gap: 3px; padding: 8px 12px 10px; background: #f2f5fa; border-radius: 4px; }
+.s-arrow::before { content: ""; position: absolute; left: 0; right: 0; bottom: -7px; border-top: 2px solid #1f4e99; }
+.s-arrow::after { content: ""; position: absolute; bottom: -12px; border: 6px solid transparent; }
+.s-right::after { right: -2px; border-left: 10px solid #1f4e99; }
+.s-left::before { border-color: #1d7a4e; }
+.s-left::after { left: -2px; border-right: 10px solid #1d7a4e; }
+.s-left { background: #f1f7f3; }
+.s-what { font-weight: 700; }
+.s-sum { font-size: 15px; font-variant-numeric: tabular-nums; }
+.s-meta { font-size: 11.5px; color: var(--paper-muted); }
+.s-meta i { font-style: normal; color: var(--paper-ink); }
+.s-list { margin: 0; padding-left: 1.1em; }
+.s-list li { margin-bottom: 2px; }
+.s-chips-h { margin-top: 16px !important; font-weight: 700; }
+.s-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.s-chips span { border: 1px solid #1f4e99; color: #1f4e99; border-radius: 999px; padding: 2px 10px; font-size: 11.5px; }
+.s-note { font-size: 10.5px; color: var(--paper-muted); margin-top: 6px !important; }
+.s-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 10px; counter-reset: s; }
+.s-steps li { position: relative; display: grid; align-content: start; gap: 3px; padding-top: 34px; font-size: 11.5px; }
+.s-steps li b { font-size: 12.5px; }
+.s-steps li > .s-link { justify-self: start; margin-left: 0; }
+.s-steps li::before { content: ""; position: absolute; top: 12px; left: 26px; right: -10px; border-top: 2px dashed var(--paper-line); }
+.s-steps li:last-child::before { display: none; }
+.s-n { position: absolute; top: 0; left: 0; width: 24px; height: 24px; border-radius: 50%; background: #1f4e99; color: #fff; display: grid; place-items: center; font-size: 11.5px; font-weight: 700; }
+.s-risks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.s-risk { border: 1px solid var(--paper-line); border-left: 3px solid #b42318; border-radius: 0 4px 4px 0; padding: 8px 12px; display: grid; align-content: start; gap: 4px; font-size: 11.5px; }
+.s-risk b { font-size: 12.5px; }
+.s-mini { margin: 0; padding-left: 1.3em; }
+.s-foot { margin-top: 22px !important; }
+@container (max-width: 640px) {
+  .s-flow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .s-arrows { grid-column: 1 / -1; grid-row: 2; }
+  .s-steps { grid-auto-flow: row; grid-auto-columns: auto; gap: 0; }
+  .s-steps li { padding: 0 0 14px 36px; }
+  .s-steps li::before { top: 26px; bottom: 0; left: 11px; right: auto; border-top: 0; border-left: 2px dashed var(--paper-line); }
+  .s-risks { grid-template-columns: minmax(0, 1fr); }
+}
+@media print {
+  @page { margin: 12mm; }
+  body { background: #fff; padding: 0; }
+  .top, .views, .form, .foot, .sheet-bar, #doc, #d-top { display: none !important; }
+  .desk { display: block; padding: 0; }
+  .sheet-col { position: static; display: block !important; }
+  .sheet { max-height: none; overflow: visible; padding: 0; }
+  #scheme { display: block !important; }
+  .s-page { box-shadow: none; margin: 0; max-width: none; padding: 0; }
+  .s-arrow, .s-n, .s-chips span { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
 </style>
 
 <div class="wrap">
@@ -258,6 +317,7 @@ textarea[aria-invalid="true"] { border-color: var(--err); }
     <ul class="facts">
       <li><b>.docx</b> со стилями «Договор: …»</li>
       <li>ИНН и счёт сверяются по <b>контрольным цифрам</b></li>
+      <li><b>схема</b> договора на одной странице</li>
       <li>данные остаются <b>в браузере</b></li>
     </ul>
   </header>
@@ -412,10 +472,14 @@ textarea[aria-invalid="true"] { border-color: var(--err); }
 
     <section class="sheet-col" aria-label="Предпросмотр договора">
       <div class="sheet-bar">
-        <h2>Предпросмотр</h2>
-        <div class="legend"><i><span class="lr">4.2</span> перекрёстная ссылка</i><i><span class="lf">____</span> поле не заполнено</i></div>
+        <div class="seg sheet-mode" role="radiogroup" aria-label="Что показать справа">
+          <label><input type="radio" name="sheet-mode" value="doc" id="mode-doc" checked><span>Договор</span></label>
+          <label><input type="radio" name="sheet-mode" value="scheme" id="mode-scheme"><span>Схема</span></label>
+        </div>
+        <button type="button" class="btn" id="btn-print" hidden>Распечатать схему</button>
+        <div class="legend" id="doc-legend"><i><span class="lr">4.2</span> перекрёстная ссылка</i><i><span class="lf">____</span> поле не заполнено</i></div>
       </div>
-      <div class="sheet" id="sheet"><div id="d-top"></div><div id="doc"></div></div>
+      <div class="sheet" id="sheet" data-mode="doc"><div id="d-top"></div><div id="doc"></div><div id="scheme"></div></div>
     </section>
   </main>
 
@@ -1055,6 +1119,120 @@ const Engine = (() => {
     return h;
   }
 
+  // ---------- схема договора ----------
+  // Одна страница для бизнеса: кто что передаёт, в каком порядке, какие сроки и что будет при нарушении.
+  // Условия берутся из той же модели, что и текст договора, у каждого элемента ссылка на свой пункт.
+  // Сроки приёмки (5 рабочих дней и т. п.) повторяют пункты шаблонов: при правке шаблона править и здесь.
+  function schemeHTML(data) {
+    const m = model(data), d = data, r = m.roles, t = typeOf(d), T = TYPES[t];
+    const R = (s) => htmlRuns(s, m.nums);
+    const rd = (v) => `${v} ${plural(Number(v) || 0, ["рабочий день", "рабочих дня", "рабочих дней"])}`;
+    const pd = d.payment_days, adv = d.advance_pct;
+    const num = d.number ? ` № ${d.number}` : "";
+    const doc = t === "supply" ? "УПД" : "Акта";
+    const advSum = d.payment === "advance" ? mulDivRound(m.total, Number(adv) || 0, 100) : 0;
+
+    // что передаёт сторона L
+    const items = d.items.map((i) => {
+      const q = fmtQty(i.qty);
+      if (t === "license") return `${fill(i.name)}: ${q} ${plural(Math.round(i.qty / 1000), ["лицензия", "лицензии", "лицензий"])}`;
+      return `${fill(i.name)}${i.unit ? `: ${q} ${i.unit}` : ""}`;
+    });
+    const period = `${dateText(d.start_date)} – ${dateText(d.end_date)}`;
+    let what, give, meta = [];
+    if (t === "license") {
+      what = "Право использования ПО"; give = items;
+      meta.push(["Территория", fill(d.territory)],
+        ["Срок", d.term === "exclusive" ? "весь срок исключительного права" : `${months(d.term)} с даты подписания Акта`]);
+    } else if (t === "supply") {
+      what = "Товар в собственность"; give = items;
+      meta.push([d.delivery_mode === "pickup" ? "Выборка со склада" : "Доставка", fill(d.delivery_address)]);
+    } else if (t === "services") {
+      what = "Услуги"; give = items;
+      meta.push(["Период", period]);
+      if (d.place) meta.push(["Место", d.place]);
+    } else {
+      what = "Результат работ"; give = [fill(d.result)];
+      meta.push(["Сроки", period], ["Материалы", d.materials === "customer" ? "Заказчика" : "Подрядчика"]);
+    }
+
+    const payHow = { prepay: `100 % предоплата в течение ${rd(pd)} с даты получения счёта`,
+      advance: `аванс ${adv} % (${fmtMoney(advSum)} руб.), остаток после подписания ${doc}`,
+      postpay: `после подписания ${doc} в течение ${rd(pd)}` }[d.payment] || "";
+
+    // шаги по времени
+    const steps = [{ t: "Подписание договора", s: fmtDate(d.date) }];
+    if (d.payment === "prepay") steps.push({ t: "Оплата", s: `${rd(pd)} с даты получения счёта`, ref: "c_pay" });
+    if (d.payment === "advance") steps.push({ t: `Аванс ${adv} %`, s: `${rd(pd)} с даты получения счёта`, ref: "c_pay" });
+    const from = { prepay: "с даты оплаты", advance: "с даты получения аванса", postpay: "с даты заключения договора" }[d.payment];
+    if (t === "license") {
+      steps.push({ t: "Передача ПО и Акта", s: `не позднее ${rd(d.transfer_days)} ${from}`, ref: "c_transfer" },
+        { t: "Подписание Акта", s: "5 рабочих дней с даты получения Акта. С этой даты право предоставлено", ref: "c_sign" });
+    } else if (t === "supply") {
+      steps.push({ t: d.delivery_mode === "pickup" ? "Товар готов к выборке" : "Доставка Товара", s: `не позднее ${rd(d.delivery_days)} ${from}`, ref: "c_deliver" },
+        { t: "Приёмка по УПД", s: "при получении Товара", ref: "c_accept" });
+    } else if (t === "services") {
+      steps.push({ t: "Оказание Услуг", s: period, ref: "c_term" },
+        { t: "Акт", s: "Исполнитель передаёт не позднее 5 рабочих дней после окончания, Заказчик подписывает за 5 рабочих дней", ref: "c_sign" });
+    } else {
+      steps.push({ t: "Выполнение Работ", s: period, ref: "c_term" },
+        { t: "Сдача и приёмка", s: "Акт не позднее 2 рабочих дней после завершения, приёмка за 5 рабочих дней", ref: "c_sign" });
+    }
+    if (d.payment === "postpay") steps.push({ t: "Оплата", s: `${rd(pd)} с даты подписания ${doc}`, ref: "c_pay" });
+    if (d.payment === "advance") steps.push({ t: "Остаток оплаты", s: `${rd(pd)} с даты подписания ${doc}`, ref: "c_pay2" });
+    if (t === "license") steps.push({ t: "Право действует", s: d.term === "exclusive" ? "весь срок исключительного права" : `${months(d.term)} с даты Акта`, ref: "s_main" });
+    if (t === "works" || t === "supply") steps.push({ t: "Гарантия", s: t === "supply" && d.warranty_mode === "manufacturer" ? "срок гарантии производителя" : `${months(d.warranty_months)} с даты подписания ${doc}`, ref: "c_warranty" });
+
+    const link = (id) => (id && m.nums[id] ? `<a class="d-ref s-link" href="#d-${id}">${id.startsWith("s_") ? "раздел" : "п."} ${esc(m.nums[id])}</a>` : "");
+    const party = (key, role) => `<div class="s-party"><span class="s-role">${esc(role)}</span><b>${R(fill(d[key].name))}</b></div>`;
+
+    let h = `<div class="d-page s-page">`;
+    h += `<p class="d-applabel">Схема к договору${esc(num)} от ${esc(fmtDate(d.date))}</p>`;
+    h += `<h1 class="d-title">${esc(T.title)}: схема</h1>`;
+    h += `<p class="s-lede">Главное из договора на одной странице. Номера пунктов ведут к тексту договора. Если схема и договор расходятся, действует договор.</p>`;
+
+    // кто что передаёт
+    h += `<h2 class="s-h">Кто что передаёт</h2><div class="s-flow">${party("licensor", r.L)}<div class="s-arrows">`;
+    h += `<div class="s-arrow s-right"><span class="s-what">${esc(what)} ${link(t === "license" ? "s_rights" : t === "supply" ? "s_goods" : t === "services" ? "s_services" : "s_works")}</span>`;
+    h += `<ul class="s-list">${give.map((g) => `<li>${R(g)}</li>`).join("")}</ul>`;
+    h += meta.map(([k, v]) => `<span class="s-meta"><i>${esc(k)}</i> ${R(v)}</span>`).join("") + `</div>`;
+    h += `<div class="s-arrow s-left"><span class="s-what">Оплата ${link("s_price")}</span><b class="s-sum">${fmtMoney(m.total)} руб.</b>`;
+    h += `<span class="s-meta">${esc(vatText(d, m.vat))}</span><span class="s-meta">${esc(payHow)}</span></div>`;
+    h += `</div>${party("user", r.U)}</div>`;
+
+    if (t === "license") {
+      const labels = METHODS.filter((x) => d.methods.includes(x.text)).map((x) => x.label);
+      const own = d.methods.length - labels.length;
+      if (own > 0) labels.push(`свои способы: ${own}`);
+      h += `<p class="s-chips-h">Что можно делать с ПО ${link("c_methods")}</p><div class="s-chips">${labels.length ? labels.map((l) => `<span>${esc(l)}</span>`).join("") : '<span class="d-fill">способы не выбраны</span>'}</div>`;
+      h += `<p class="s-note">Способ, которого нет в договоре, ${esc(r.Ud)} не разрешён (п. 1 ст. 1235 ГК РФ).</p>`;
+    }
+
+    // порядок и сроки
+    h += `<h2 class="s-h">Порядок и сроки</h2><ol class="s-steps">`;
+    h += steps.map((s, i) => `<li><span class="s-n">${i + 1}</span><b>${esc(s.t)}</b><span>${R(s.s)}</span>${link(s.ref)}</li>`).join("");
+    h += `</ol>`;
+
+    // нарушения
+    h += `<h2 class="s-h">Если что-то пошло не так</h2><div class="s-risks">`;
+    const sanc = m.sections.find((s) => s.id === "s_sanctions");
+    const tbl = sanc && sanc.blocks.find((b) => b.k === "table");
+    if (tbl) {
+      let side = "";
+      for (const row of tbl.rows) {
+        if (row.length === 1) { if (side) h += `</ul></div>`; side = row[0]; h += `<div class="s-risk"><b>${R(side)}</b><ul class="s-list">`; continue; }
+        h += `<li>${R(row[0])}: ${R(row[1].replace(/^\p{Lu}(?=\p{Ll})/u, (c) => c.toLowerCase()))}</li>`;
+      }
+      if (side) h += `</ul></div>`;
+    }
+    const refusal = m.sections.find((s) => s.id === "s_refusal");
+    if (refusal) h += `<div class="s-risk"><b>Отказ от договора ${link("s_refusal")}</b><ul class="s-list">${refusal.blocks.filter((b) => b.k === "p").map((b) => `<li>${R(b.t)}</li>`).join("")}</ul></div>`;
+    h += `<div class="s-risk"><b>Спор ${link("s_disputes")}</b><ol class="s-mini"><li>Претензия с расчётом требований</li><li>Ответ не позднее 15 рабочих дней</li><li>${R(cap(courtText(d)))}</li></ol></div>`;
+    h += `</div>`;
+    h += `<p class="d-note s-foot">Схема составлена по тексту договора и не заменяет его.</p></div>`;
+    return h;
+  }
+
   // ---------- сборка .docx ----------
   const W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"';
   const xe = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1276,7 +1454,7 @@ const Engine = (() => {
     return zip.generateAsync({ type, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document", compression: "DEFLATE" });
   }
 
-  return { TYPES, METHODS, VAT_RATES, parseMoney, parseQty, fmtQty, lineSum, fmtMoney, plural, totals, fmtDate, check, fmtPhone, roles, model, previewHTML, docxFiles, buildDocx, typograph };
+  return { TYPES, METHODS, VAT_RATES, parseMoney, parseQty, fmtQty, lineSum, fmtMoney, plural, totals, fmtDate, check, fmtPhone, roles, model, previewHTML, schemeHTML, docxFiles, buildDocx, typograph };
 })();
 
 
@@ -1588,6 +1766,7 @@ const Engine = (() => {
     timer = setTimeout(() => {
       const sheet = $("#sheet"), y = sheet.scrollTop;
       $("#doc").innerHTML = E.previewHTML(data);
+      $("#scheme").innerHTML = E.schemeHTML(data);
       sheet.scrollTop = y;
     }, 120);
     try { localStorage.setItem(STORE, JSON.stringify({ state, mode })); } catch (e) { /* без черновика */ }
@@ -1672,8 +1851,20 @@ const Engine = (() => {
     const a = ev.target.closest(".d-ref");
     if (!a) return;
     ev.preventDefault();
+    if ($("#sheet").dataset.mode === "scheme") setSheetMode("doc");
     jump(a.getAttribute("href").slice(1), true);
   });
+
+  // ---------- договор или схема ----------
+  function setSheetMode(v) {
+    $("#sheet").dataset.mode = v;
+    $(`#mode-${v}`).checked = true;
+    $("#btn-print").hidden = v !== "scheme";
+    $("#doc-legend").hidden = v === "scheme";
+    $("#sheet").scrollTop = 0;
+  }
+  $$("input[name='sheet-mode']").forEach((r) => r.addEventListener("change", () => setSheetMode(r.value)));
+  $("#btn-print").addEventListener("click", () => window.print());
 
   function setView(v) { $("#desk").dataset.view = v; $(`#view-${v}`).checked = true; window.scrollTo({ top: 0 }); }
   $$("input[name='view']").forEach((r) => r.addEventListener("change", () => setView(r.value)));
