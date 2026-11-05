@@ -1,9 +1,13 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>:root{color-scheme:light dark}body{margin:0}img{max-width:100%}</style></head><body><title>Конструктор договоров</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Конструктор договоров</title>
 <meta name="description" content="Лицензионный договор на ПО, поставка, услуги и подряд по анкете: предпросмотр по ходу заполнения и скачивание в Word.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>:root{color-scheme:light dark}body{margin:0}img{max-width:100%}</style>
 <style>
 /* Рабочий стол юриста: слева анкета по разделам договора, справа лист, который пишется по ходу заполнения.
    Синий акцент тот же, что у перекрёстных ссылок в готовом .docx. */
@@ -217,6 +221,9 @@ textarea[aria-invalid="true"] { border-color: var(--err); }
 
 .foot { border-top: 1px solid var(--line); padding-block: 18px 28px; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
 .foot p { margin: 0; max-width: 70ch; }
+.foot a { color: inherit; text-underline-offset: 2px; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.foot-owner { flex-basis: 100%; }
 
 /* ---- узкие экраны ---- */
 @media (max-width: 1060px) {
@@ -309,6 +316,8 @@ textarea[aria-invalid="true"] { border-color: var(--err); }
   .s-arrow, .s-n, .s-chips span { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 </style>
+</head>
+<body>
 
 <div class="wrap">
   <header class="top">
@@ -484,11 +493,13 @@ textarea[aria-invalid="true"] { border-color: var(--err); }
   </main>
 
   <footer class="foot">
-    <p>Договор собирается по типовому шаблону. Перед подписанием его должен проверить юрист.</p>
+    <p>Договор собирается по типовому шаблону и не заменяет юридическую консультацию. Перед подписанием его должен проверить юрист.</p>
+    <p class="foot-links"><a href="terms.html">Условия использования</a> <a href="privacy.html">Политика конфиденциальности</a></p>
+    <p class="foot-owner">Владелец сайта: Хорохорин Владислав, Москва · <a href="mailto:vladhorohorin2@gmail.com">vladhorohorin2@gmail.com</a></p>
   </footer>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="assets/js/jszip.min.js"></script>
 <script>
 /* Движок конструктора: шаблон лицензионного договора, проверки реквизитов, предпросмотр
    и сборка .docx. Работает без сервера: договор собирается в браузере.
